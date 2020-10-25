@@ -1,0 +1,805 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="OSRSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="cart_id" />
+          </Key>
+          <Property Name="cart_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userid" Type="int" Nullable="false" />
+          <Property Name="price" Type="float" />
+        </EntityType>
+        <EntityType Name="CartItemMapping">
+          <Key>
+            <PropertyRef Name="cartitemmapping_id" />
+          </Key>
+          <Property Name="cart_id" Type="int" Nullable="false" />
+          <Property Name="product_id" Type="int" Nullable="false" />
+          <Property Name="quantity" Type="int" Nullable="false" />
+          <Property Name="no_of_renting_days" Type="int" Nullable="false" />
+          <Property Name="cartitemmapping_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderItemMapping">
+          <Key>
+            <PropertyRef Name="orderitemmapping_id" />
+          </Key>
+          <Property Name="order_id" Type="int" Nullable="false" />
+          <Property Name="product_id" Type="int" Nullable="false" />
+          <Property Name="quantity" Type="int" Nullable="false" />
+          <Property Name="no_of_renting_days" Type="int" Nullable="false" />
+          <Property Name="orderitemmapping_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderTable">
+          <Key>
+            <PropertyRef Name="order_id" />
+          </Key>
+          <Property Name="order_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userid" Type="int" Nullable="false" />
+          <Property Name="amount" Type="float" Nullable="false" />
+          <Property Name="order_date" Type="datetime" />
+          <Property Name="shipping_date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="paymentid" />
+          </Key>
+          <Property Name="nameOnCard" Type="varchar" MaxLength="30" />
+          <Property Name="cardNumber" Type="int" />
+          <Property Name="cvv" Type="int" />
+          <Property Name="netbankingName" Type="varchar" MaxLength="30" />
+          <Property Name="paymentid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="order_id" Type="int" Nullable="false" />
+          <Property Name="userid" Type="int" Nullable="false" />
+          <Property Name="expiryDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="product_id" />
+          </Key>
+          <Property Name="product_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userid" Type="int" Nullable="false" />
+          <Property Name="product_name" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="price" Type="float" Nullable="false" />
+          <Property Name="product_category" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="RoleType">
+          <Key>
+            <PropertyRef Name="roleid" />
+          </Key>
+          <Property Name="user_type" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="roleid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Transactions">
+          <Key>
+            <PropertyRef Name="transactionsid" />
+          </Key>
+          <Property Name="paymentid" Type="int" Nullable="false" />
+          <Property Name="userid" Type="int" Nullable="false" />
+          <Property Name="transactionDate" Type="datetime" />
+          <Property Name="amount" Type="float" />
+          <Property Name="transactionsid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserTable">
+          <Key>
+            <PropertyRef Name="userid" />
+          </Key>
+          <Property Name="name" Type="char" MaxLength="50" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="contact_number" Type="varchar" MaxLength="10" />
+          <Property Name="userid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="usertype" Type="int" />
+        </EntityType>
+        <Association Name="FK__Cart__userid__5441852A">
+          <End Role="UserTable" Type="Self.UserTable" Multiplicity="1" />
+          <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTable">
+              <PropertyRef Name="userid" />
+            </Principal>
+            <Dependent Role="Cart">
+              <PropertyRef Name="userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CartItemM__cart___5812160E">
+          <End Role="Cart" Type="Self.Cart" Multiplicity="1" />
+          <End Role="CartItemMapping" Type="Self.CartItemMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cart">
+              <PropertyRef Name="cart_id" />
+            </Principal>
+            <Dependent Role="CartItemMapping">
+              <PropertyRef Name="cart_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CartItemM__produ__571DF1D5">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="CartItemMapping" Type="Self.CartItemMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="product_id" />
+            </Principal>
+            <Dependent Role="CartItemMapping">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderItem__order__5DCAEF64">
+          <End Role="OrderTable" Type="Self.OrderTable" Multiplicity="1" />
+          <End Role="OrderItemMapping" Type="Self.OrderItemMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderTable">
+              <PropertyRef Name="order_id" />
+            </Principal>
+            <Dependent Role="OrderItemMapping">
+              <PropertyRef Name="order_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderItem__produ__5CD6CB2B">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="OrderItemMapping" Type="Self.OrderItemMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="product_id" />
+            </Principal>
+            <Dependent Role="OrderItemMapping">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderTabl__useri__01142BA1">
+          <End Role="UserTable" Type="Self.UserTable" Multiplicity="1" />
+          <End Role="OrderTable" Type="Self.OrderTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTable">
+              <PropertyRef Name="userid" />
+            </Principal>
+            <Dependent Role="OrderTable">
+              <PropertyRef Name="userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderTabl__useri__5AEE82B9">
+          <End Role="UserTable" Type="Self.UserTable" Multiplicity="1" />
+          <End Role="OrderTable" Type="Self.OrderTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTable">
+              <PropertyRef Name="userid" />
+            </Principal>
+            <Dependent Role="OrderTable">
+              <PropertyRef Name="userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__userid__2B3F6F97">
+          <End Role="UserTable" Type="Self.UserTable" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTable">
+              <PropertyRef Name="userid" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserTable__usert__70DDC3D8">
+          <End Role="RoleType" Type="Self.RoleType" Multiplicity="0..1" />
+          <End Role="UserTable" Type="Self.UserTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RoleType">
+              <PropertyRef Name="roleid" />
+            </Principal>
+            <Dependent Role="UserTable">
+              <PropertyRef Name="usertype" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_payment_oid">
+          <End Role="OrderTable" Type="Self.OrderTable" Multiplicity="1" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderTable">
+              <PropertyRef Name="order_id" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="order_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_payment_uid">
+          <End Role="UserTable" Type="Self.UserTable" Multiplicity="1" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTable">
+              <PropertyRef Name="userid" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tranactions_pid">
+          <End Role="Payment" Type="Self.Payment" Multiplicity="1" />
+          <End Role="Transactions" Type="Self.Transactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payment">
+              <PropertyRef Name="paymentid" />
+            </Principal>
+            <Dependent Role="Transactions">
+              <PropertyRef Name="paymentid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tranactions_uid">
+          <End Role="UserTable" Type="Self.UserTable" Multiplicity="1" />
+          <End Role="Transactions" Type="Self.Transactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTable">
+              <PropertyRef Name="userid" />
+            </Principal>
+            <Dependent Role="Transactions">
+              <PropertyRef Name="userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="addPaymentTransactions" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nameOnCard" Type="varchar" Mode="In" />
+          <Parameter Name="cardNumber" Type="int" Mode="In" />
+          <Parameter Name="cvv" Type="int" Mode="In" />
+          <Parameter Name="netbankingName" Type="varchar" Mode="In" />
+          <Parameter Name="order_id" Type="int" Mode="In" />
+          <Parameter Name="userid" Type="int" Mode="In" />
+          <Parameter Name="expiryDate" Type="datetime" Mode="In" />
+          <Parameter Name="amount" Type="float" Mode="In" />
+        </Function>
+        <EntityContainer Name="OSRSModelStoreContainer">
+          <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CartItemMapping" EntityType="Self.CartItemMapping" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderItemMapping" EntityType="Self.OrderItemMapping" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderTable" EntityType="Self.OrderTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RoleType" EntityType="Self.RoleType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Transactions" EntityType="Self.Transactions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserTable" EntityType="Self.UserTable" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Cart__userid__5441852A" Association="Self.FK__Cart__userid__5441852A">
+            <End Role="UserTable" EntitySet="UserTable" />
+            <End Role="Cart" EntitySet="Cart" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CartItemM__cart___5812160E" Association="Self.FK__CartItemM__cart___5812160E">
+            <End Role="Cart" EntitySet="Cart" />
+            <End Role="CartItemMapping" EntitySet="CartItemMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CartItemM__produ__571DF1D5" Association="Self.FK__CartItemM__produ__571DF1D5">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="CartItemMapping" EntitySet="CartItemMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderItem__order__5DCAEF64" Association="Self.FK__OrderItem__order__5DCAEF64">
+            <End Role="OrderTable" EntitySet="OrderTable" />
+            <End Role="OrderItemMapping" EntitySet="OrderItemMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderItem__produ__5CD6CB2B" Association="Self.FK__OrderItem__produ__5CD6CB2B">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="OrderItemMapping" EntitySet="OrderItemMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderTabl__useri__01142BA1" Association="Self.FK__OrderTabl__useri__01142BA1">
+            <End Role="UserTable" EntitySet="UserTable" />
+            <End Role="OrderTable" EntitySet="OrderTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderTabl__useri__5AEE82B9" Association="Self.FK__OrderTabl__useri__5AEE82B9">
+            <End Role="UserTable" EntitySet="UserTable" />
+            <End Role="OrderTable" EntitySet="OrderTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__userid__2B3F6F97" Association="Self.FK__Product__userid__2B3F6F97">
+            <End Role="UserTable" EntitySet="UserTable" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserTable__usert__70DDC3D8" Association="Self.FK__UserTable__usert__70DDC3D8">
+            <End Role="RoleType" EntitySet="RoleType" />
+            <End Role="UserTable" EntitySet="UserTable" />
+          </AssociationSet>
+          <AssociationSet Name="fk_payment_oid" Association="Self.fk_payment_oid">
+            <End Role="OrderTable" EntitySet="OrderTable" />
+            <End Role="Payment" EntitySet="Payment" />
+          </AssociationSet>
+          <AssociationSet Name="fk_payment_uid" Association="Self.fk_payment_uid">
+            <End Role="UserTable" EntitySet="UserTable" />
+            <End Role="Payment" EntitySet="Payment" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tranactions_pid" Association="Self.fk_tranactions_pid">
+            <End Role="Payment" EntitySet="Payment" />
+            <End Role="Transactions" EntitySet="Transactions" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tranactions_uid" Association="Self.fk_tranactions_uid">
+            <End Role="UserTable" EntitySet="UserTable" />
+            <End Role="Transactions" EntitySet="Transactions" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="OSRSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="RoleType">
+          <Key>
+            <PropertyRef Name="roleid" />
+          </Key>
+          <Property Name="user_type" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="roleid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="UserTables" Relationship="Self.FK__UserTable__usert__70DDC3D8" FromRole="RoleType" ToRole="UserTable" />
+        </EntityType>
+        <EntityType Name="UserTable">
+          <Key>
+            <PropertyRef Name="userid" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="contact_number" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="userid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="usertype" Type="Int32" />
+          <NavigationProperty Name="RoleType" Relationship="Self.FK__UserTable__usert__70DDC3D8" FromRole="UserTable" ToRole="RoleType" />
+          <NavigationProperty Name="Carts" Relationship="OSRSModel.FK__Cart__userid__5441852A" FromRole="UserTable" ToRole="Cart" />
+          <NavigationProperty Name="OrderTables" Relationship="OSRSModel.FK__OrderTabl__useri__01142BA1" FromRole="UserTable" ToRole="OrderTable" />
+          <NavigationProperty Name="OrderTables1" Relationship="OSRSModel.FK__OrderTabl__useri__5AEE82B9" FromRole="UserTable" ToRole="OrderTable" />
+          <NavigationProperty Name="Payments" Relationship="OSRSModel.fk_payment_uid" FromRole="UserTable" ToRole="Payment" />
+          <NavigationProperty Name="Products" Relationship="OSRSModel.FK__Product__userid__2B3F6F97" FromRole="UserTable" ToRole="Product" />
+          <NavigationProperty Name="Transactions" Relationship="OSRSModel.fk_tranactions_uid" FromRole="UserTable" ToRole="Transaction" />
+        </EntityType>
+        <Association Name="FK__UserTable__usert__70DDC3D8">
+          <End Role="RoleType" Type="Self.RoleType" Multiplicity="0..1" />
+          <End Role="UserTable" Type="OSRSModel.UserTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RoleType">
+              <PropertyRef Name="roleid" />
+            </Principal>
+            <Dependent Role="UserTable">
+              <PropertyRef Name="usertype" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OSRSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="RoleTypes" EntityType="Self.RoleType" />
+          <EntitySet Name="UserTables" EntityType="OSRSModel.UserTable" />
+          <AssociationSet Name="FK__UserTable__usert__70DDC3D8" Association="Self.FK__UserTable__usert__70DDC3D8">
+            <End Role="RoleType" EntitySet="RoleTypes" />
+            <End Role="UserTable" EntitySet="UserTables" />
+          </AssociationSet>
+          <EntitySet Name="Carts" EntityType="OSRSModel.Cart" />
+          <EntitySet Name="CartItemMappings" EntityType="OSRSModel.CartItemMapping" />
+          <EntitySet Name="OrderItemMappings" EntityType="OSRSModel.OrderItemMapping" />
+          <EntitySet Name="OrderTables" EntityType="OSRSModel.OrderTable" />
+          <EntitySet Name="Payments" EntityType="OSRSModel.Payment" />
+          <EntitySet Name="Products" EntityType="OSRSModel.Product" />
+          <EntitySet Name="Transactions" EntityType="OSRSModel.Transaction" />
+          <AssociationSet Name="FK__Cart__userid__5441852A" Association="OSRSModel.FK__Cart__userid__5441852A">
+            <End Role="UserTable" EntitySet="UserTables" />
+            <End Role="Cart" EntitySet="Carts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CartItemM__cart___5812160E" Association="OSRSModel.FK__CartItemM__cart___5812160E">
+            <End Role="Cart" EntitySet="Carts" />
+            <End Role="CartItemMapping" EntitySet="CartItemMappings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CartItemM__produ__571DF1D5" Association="OSRSModel.FK__CartItemM__produ__571DF1D5">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="CartItemMapping" EntitySet="CartItemMappings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderItem__order__5DCAEF64" Association="OSRSModel.FK__OrderItem__order__5DCAEF64">
+            <End Role="OrderTable" EntitySet="OrderTables" />
+            <End Role="OrderItemMapping" EntitySet="OrderItemMappings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderItem__produ__5CD6CB2B" Association="OSRSModel.FK__OrderItem__produ__5CD6CB2B">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="OrderItemMapping" EntitySet="OrderItemMappings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderTabl__useri__01142BA1" Association="OSRSModel.FK__OrderTabl__useri__01142BA1">
+            <End Role="UserTable" EntitySet="UserTables" />
+            <End Role="OrderTable" EntitySet="OrderTables" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderTabl__useri__5AEE82B9" Association="OSRSModel.FK__OrderTabl__useri__5AEE82B9">
+            <End Role="UserTable" EntitySet="UserTables" />
+            <End Role="OrderTable" EntitySet="OrderTables" />
+          </AssociationSet>
+          <AssociationSet Name="fk_payment_oid" Association="OSRSModel.fk_payment_oid">
+            <End Role="OrderTable" EntitySet="OrderTables" />
+            <End Role="Payment" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="fk_payment_uid" Association="OSRSModel.fk_payment_uid">
+            <End Role="UserTable" EntitySet="UserTables" />
+            <End Role="Payment" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tranactions_pid" Association="OSRSModel.fk_tranactions_pid">
+            <End Role="Payment" EntitySet="Payments" />
+            <End Role="Transaction" EntitySet="Transactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__userid__2B3F6F97" Association="OSRSModel.FK__Product__userid__2B3F6F97">
+            <End Role="UserTable" EntitySet="UserTables" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tranactions_uid" Association="OSRSModel.fk_tranactions_uid">
+            <End Role="UserTable" EntitySet="UserTables" />
+            <End Role="Transaction" EntitySet="Transactions" />
+          </AssociationSet>
+          <FunctionImport Name="addPaymentTransactions">
+            <Parameter Name="nameOnCard" Mode="In" Type="String" />
+            <Parameter Name="cardNumber" Mode="In" Type="Int32" />
+            <Parameter Name="cvv" Mode="In" Type="Int32" />
+            <Parameter Name="netbankingName" Mode="In" Type="String" />
+            <Parameter Name="order_id" Mode="In" Type="Int32" />
+            <Parameter Name="userid" Mode="In" Type="Int32" />
+            <Parameter Name="expiryDate" Mode="In" Type="DateTime" />
+            <Parameter Name="amount" Mode="In" Type="Double" />
+          </FunctionImport>
+        </EntityContainer>
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="cart_id" />
+          </Key>
+          <Property Name="cart_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userid" Type="Int32" Nullable="false" />
+          <Property Name="price" Type="Double" />
+          <NavigationProperty Name="UserTable" Relationship="OSRSModel.FK__Cart__userid__5441852A" FromRole="Cart" ToRole="UserTable" />
+          <NavigationProperty Name="CartItemMappings" Relationship="OSRSModel.FK__CartItemM__cart___5812160E" FromRole="Cart" ToRole="CartItemMapping" />
+        </EntityType>
+        <EntityType Name="CartItemMapping">
+          <Key>
+            <PropertyRef Name="cartitemmapping_id" />
+          </Key>
+          <Property Name="cart_id" Type="Int32" Nullable="false" />
+          <Property Name="product_id" Type="Int32" Nullable="false" />
+          <Property Name="quantity" Type="Int32" Nullable="false" />
+          <Property Name="no_of_renting_days" Type="Int32" Nullable="false" />
+          <Property Name="cartitemmapping_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cart" Relationship="OSRSModel.FK__CartItemM__cart___5812160E" FromRole="CartItemMapping" ToRole="Cart" />
+          <NavigationProperty Name="Product" Relationship="OSRSModel.FK__CartItemM__produ__571DF1D5" FromRole="CartItemMapping" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="OrderItemMapping">
+          <Key>
+            <PropertyRef Name="orderitemmapping_id" />
+          </Key>
+          <Property Name="order_id" Type="Int32" Nullable="false" />
+          <Property Name="product_id" Type="Int32" Nullable="false" />
+          <Property Name="quantity" Type="Int32" Nullable="false" />
+          <Property Name="no_of_renting_days" Type="Int32" Nullable="false" />
+          <Property Name="orderitemmapping_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="OrderTable" Relationship="OSRSModel.FK__OrderItem__order__5DCAEF64" FromRole="OrderItemMapping" ToRole="OrderTable" />
+          <NavigationProperty Name="Product" Relationship="OSRSModel.FK__OrderItem__produ__5CD6CB2B" FromRole="OrderItemMapping" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="OrderTable">
+          <Key>
+            <PropertyRef Name="order_id" />
+          </Key>
+          <Property Name="order_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userid" Type="Int32" Nullable="false" />
+          <Property Name="amount" Type="Double" Nullable="false" />
+          <Property Name="order_date" Type="DateTime" Precision="3" />
+          <Property Name="shipping_date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="OrderItemMappings" Relationship="OSRSModel.FK__OrderItem__order__5DCAEF64" FromRole="OrderTable" ToRole="OrderItemMapping" />
+          <NavigationProperty Name="UserTable" Relationship="OSRSModel.FK__OrderTabl__useri__01142BA1" FromRole="OrderTable" ToRole="UserTable" />
+          <NavigationProperty Name="UserTable1" Relationship="OSRSModel.FK__OrderTabl__useri__5AEE82B9" FromRole="OrderTable" ToRole="UserTable" />
+          <NavigationProperty Name="Payments" Relationship="OSRSModel.fk_payment_oid" FromRole="OrderTable" ToRole="Payment" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="paymentid" />
+          </Key>
+          <Property Name="nameOnCard" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="cardNumber" Type="Int32" />
+          <Property Name="cvv" Type="Int32" />
+          <Property Name="netbankingName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="paymentid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="order_id" Type="Int32" Nullable="false" />
+          <Property Name="userid" Type="Int32" Nullable="false" />
+          <Property Name="expiryDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="OrderTable" Relationship="OSRSModel.fk_payment_oid" FromRole="Payment" ToRole="OrderTable" />
+          <NavigationProperty Name="UserTable" Relationship="OSRSModel.fk_payment_uid" FromRole="Payment" ToRole="UserTable" />
+          <NavigationProperty Name="Transactions" Relationship="OSRSModel.fk_tranactions_pid" FromRole="Payment" ToRole="Transaction" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="product_id" />
+          </Key>
+          <Property Name="product_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userid" Type="Int32" Nullable="false" />
+          <Property Name="product_name" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="price" Type="Double" Nullable="false" />
+          <Property Name="product_category" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CartItemMappings" Relationship="OSRSModel.FK__CartItemM__produ__571DF1D5" FromRole="Product" ToRole="CartItemMapping" />
+          <NavigationProperty Name="OrderItemMappings" Relationship="OSRSModel.FK__OrderItem__produ__5CD6CB2B" FromRole="Product" ToRole="OrderItemMapping" />
+          <NavigationProperty Name="UserTable" Relationship="OSRSModel.FK__Product__userid__2B3F6F97" FromRole="Product" ToRole="UserTable" />
+        </EntityType>
+        <EntityType Name="Transaction">
+          <Key>
+            <PropertyRef Name="transactionsid" />
+          </Key>
+          <Property Name="paymentid" Type="Int32" Nullable="false" />
+          <Property Name="userid" Type="Int32" Nullable="false" />
+          <Property Name="transactionDate" Type="DateTime" Precision="3" />
+          <Property Name="amount" Type="Double" />
+          <Property Name="transactionsid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Payment" Relationship="OSRSModel.fk_tranactions_pid" FromRole="Transaction" ToRole="Payment" />
+          <NavigationProperty Name="UserTable" Relationship="OSRSModel.fk_tranactions_uid" FromRole="Transaction" ToRole="UserTable" />
+        </EntityType>
+        <Association Name="FK__Cart__userid__5441852A">
+          <End Type="OSRSModel.UserTable" Role="UserTable" Multiplicity="1" />
+          <End Type="OSRSModel.Cart" Role="Cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTable">
+              <PropertyRef Name="userid" />
+            </Principal>
+            <Dependent Role="Cart">
+              <PropertyRef Name="userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CartItemM__cart___5812160E">
+          <End Type="OSRSModel.Cart" Role="Cart" Multiplicity="1" />
+          <End Type="OSRSModel.CartItemMapping" Role="CartItemMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cart">
+              <PropertyRef Name="cart_id" />
+            </Principal>
+            <Dependent Role="CartItemMapping">
+              <PropertyRef Name="cart_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CartItemM__produ__571DF1D5">
+          <End Type="OSRSModel.Product" Role="Product" Multiplicity="1" />
+          <End Type="OSRSModel.CartItemMapping" Role="CartItemMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="product_id" />
+            </Principal>
+            <Dependent Role="CartItemMapping">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderItem__order__5DCAEF64">
+          <End Type="OSRSModel.OrderTable" Role="OrderTable" Multiplicity="1" />
+          <End Type="OSRSModel.OrderItemMapping" Role="OrderItemMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderTable">
+              <PropertyRef Name="order_id" />
+            </Principal>
+            <Dependent Role="OrderItemMapping">
+              <PropertyRef Name="order_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderItem__produ__5CD6CB2B">
+          <End Type="OSRSModel.Product" Role="Product" Multiplicity="1" />
+          <End Type="OSRSModel.OrderItemMapping" Role="OrderItemMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="product_id" />
+            </Principal>
+            <Dependent Role="OrderItemMapping">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderTabl__useri__01142BA1">
+          <End Type="OSRSModel.UserTable" Role="UserTable" Multiplicity="1" />
+          <End Type="OSRSModel.OrderTable" Role="OrderTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTable">
+              <PropertyRef Name="userid" />
+            </Principal>
+            <Dependent Role="OrderTable">
+              <PropertyRef Name="userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderTabl__useri__5AEE82B9">
+          <End Type="OSRSModel.UserTable" Role="UserTable" Multiplicity="1" />
+          <End Type="OSRSModel.OrderTable" Role="OrderTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTable">
+              <PropertyRef Name="userid" />
+            </Principal>
+            <Dependent Role="OrderTable">
+              <PropertyRef Name="userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_payment_oid">
+          <End Type="OSRSModel.OrderTable" Role="OrderTable" Multiplicity="1" />
+          <End Type="OSRSModel.Payment" Role="Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderTable">
+              <PropertyRef Name="order_id" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="order_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_payment_uid">
+          <End Type="OSRSModel.UserTable" Role="UserTable" Multiplicity="1" />
+          <End Type="OSRSModel.Payment" Role="Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTable">
+              <PropertyRef Name="userid" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tranactions_pid">
+          <End Type="OSRSModel.Payment" Role="Payment" Multiplicity="1" />
+          <End Type="OSRSModel.Transaction" Role="Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payment">
+              <PropertyRef Name="paymentid" />
+            </Principal>
+            <Dependent Role="Transaction">
+              <PropertyRef Name="paymentid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__userid__2B3F6F97">
+          <End Type="OSRSModel.UserTable" Role="UserTable" Multiplicity="1" />
+          <End Type="OSRSModel.Product" Role="Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTable">
+              <PropertyRef Name="userid" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tranactions_uid">
+          <End Type="OSRSModel.UserTable" Role="UserTable" Multiplicity="1" />
+          <End Type="OSRSModel.Transaction" Role="Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTable">
+              <PropertyRef Name="userid" />
+            </Principal>
+            <Dependent Role="Transaction">
+              <PropertyRef Name="userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="OSRSModelStoreContainer" CdmEntityContainer="OSRSEntities">
+          <EntitySetMapping Name="RoleTypes">
+            <EntityTypeMapping TypeName="OSRSModel.RoleType">
+              <MappingFragment StoreEntitySet="RoleType">
+                <ScalarProperty Name="user_type" ColumnName="user_type" />
+                <ScalarProperty Name="roleid" ColumnName="roleid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserTables">
+            <EntityTypeMapping TypeName="OSRSModel.UserTable">
+              <MappingFragment StoreEntitySet="UserTable">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="contact_number" ColumnName="contact_number" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="usertype" ColumnName="usertype" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Carts">
+            <EntityTypeMapping TypeName="OSRSModel.Cart">
+              <MappingFragment StoreEntitySet="Cart">
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="cart_id" ColumnName="cart_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CartItemMappings">
+            <EntityTypeMapping TypeName="OSRSModel.CartItemMapping">
+              <MappingFragment StoreEntitySet="CartItemMapping">
+                <ScalarProperty Name="cartitemmapping_id" ColumnName="cartitemmapping_id" />
+                <ScalarProperty Name="no_of_renting_days" ColumnName="no_of_renting_days" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="cart_id" ColumnName="cart_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderItemMappings">
+            <EntityTypeMapping TypeName="OSRSModel.OrderItemMapping">
+              <MappingFragment StoreEntitySet="OrderItemMapping">
+                <ScalarProperty Name="orderitemmapping_id" ColumnName="orderitemmapping_id" />
+                <ScalarProperty Name="no_of_renting_days" ColumnName="no_of_renting_days" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="order_id" ColumnName="order_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderTables">
+            <EntityTypeMapping TypeName="OSRSModel.OrderTable">
+              <MappingFragment StoreEntitySet="OrderTable">
+                <ScalarProperty Name="shipping_date" ColumnName="shipping_date" />
+                <ScalarProperty Name="order_date" ColumnName="order_date" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="order_id" ColumnName="order_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payments">
+            <EntityTypeMapping TypeName="OSRSModel.Payment">
+              <MappingFragment StoreEntitySet="Payment">
+                <ScalarProperty Name="expiryDate" ColumnName="expiryDate" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="order_id" ColumnName="order_id" />
+                <ScalarProperty Name="paymentid" ColumnName="paymentid" />
+                <ScalarProperty Name="netbankingName" ColumnName="netbankingName" />
+                <ScalarProperty Name="cvv" ColumnName="cvv" />
+                <ScalarProperty Name="cardNumber" ColumnName="cardNumber" />
+                <ScalarProperty Name="nameOnCard" ColumnName="nameOnCard" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="OSRSModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="product_category" ColumnName="product_category" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="product_name" ColumnName="product_name" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Transactions">
+            <EntityTypeMapping TypeName="OSRSModel.Transaction">
+              <MappingFragment StoreEntitySet="Transactions">
+                <ScalarProperty Name="transactionsid" ColumnName="transactionsid" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="transactionDate" ColumnName="transactionDate" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="paymentid" ColumnName="paymentid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="addPaymentTransactions" FunctionName="OSRSModel.Store.addPaymentTransactions" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    //string btnPlaceOrder = "Place Order";
+    string amPayment = "Index";
+    string cnPayment = "Payment";
+}
+
+<h2>Customer</h2>
+
+
+@if (Session["userid"] != null)
+{
+    <p>
+        userid is @Session["userid"]
+    </p>
+}
+
+<input type="button"
+       value="Place Order"
+       onclick="location.href= '@Url.Action(@amPayment, @cnPayment )' " class="btn btn-default"  />

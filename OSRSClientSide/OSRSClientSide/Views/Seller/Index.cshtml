@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Seller</h2>
+
+@if (Session["userid"] != null)
+{
+    <p>
+        userid is @Session["userid"]
+    </p>
+}

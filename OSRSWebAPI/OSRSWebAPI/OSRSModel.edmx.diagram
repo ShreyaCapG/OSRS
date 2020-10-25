@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d823525a5d644655b45316fe2666b76f" Name="Diagram1">
+        <EntityTypeShape EntityType="OSRSModel.RoleType" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OSRSModel.UserTable" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="OSRSModel.FK__UserTable__usert__70DDC3D8" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="OSRSModel.Cart" Width="1.5" PointX="5.25" PointY="13.125" />
+        <EntityTypeShape EntityType="OSRSModel.CartItemMapping" Width="1.5" PointX="7.5" PointY="11.375" />
+        <EntityTypeShape EntityType="OSRSModel.OrderItemMapping" Width="1.5" PointX="7.5" PointY="8.25" />
+        <EntityTypeShape EntityType="OSRSModel.OrderTable" Width="1.5" PointX="5.25" PointY="6.375" />
+        <EntityTypeShape EntityType="OSRSModel.Payment" Width="1.5" PointX="7.5" PointY="3.5" />
+        <EntityTypeShape EntityType="OSRSModel.Product" Width="1.5" PointX="5.25" PointY="9.875" />
+        <EntityTypeShape EntityType="OSRSModel.Transaction" Width="1.5" PointX="9.75" PointY="2.625" />
+        <AssociationConnector Association="OSRSModel.FK__Cart__userid__5441852A" />
+        <AssociationConnector Association="OSRSModel.FK__CartItemM__cart___5812160E" />
+        <AssociationConnector Association="OSRSModel.FK__CartItemM__produ__571DF1D5" />
+        <AssociationConnector Association="OSRSModel.FK__OrderItem__order__5DCAEF64" />
+        <AssociationConnector Association="OSRSModel.FK__OrderItem__produ__5CD6CB2B" />
+        <AssociationConnector Association="OSRSModel.FK__OrderTabl__useri__01142BA1" />
+        <AssociationConnector Association="OSRSModel.FK__OrderTabl__useri__5AEE82B9" />
+        <AssociationConnector Association="OSRSModel.fk_payment_oid" />
+        <AssociationConnector Association="OSRSModel.fk_payment_uid" />
+        <AssociationConnector Association="OSRSModel.fk_tranactions_pid" />
+        <AssociationConnector Association="OSRSModel.FK__Product__userid__2B3F6F97" />
+        <AssociationConnector Association="OSRSModel.fk_tranactions_uid" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
