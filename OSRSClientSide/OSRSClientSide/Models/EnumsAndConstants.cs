@@ -12,5 +12,12 @@ namespace OSRSClientSide.Models
             seller = 1,
             customer = 2
         }
+        public enum Banks
+        {
+            AXIS,
+            HDFC,
+            SBI,
+            ICICI
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using OSRSWebAPI.Models;
+using System;
 using System.Collections.Generic;
 using System.Web.Configuration;
 using System.Web.Http;
@@ -48,6 +49,7 @@ namespace OSRSWebAPI.Controllers
 
             using (var ctx = new OSRSEntities())
             {
+                
                 ctx.addPaymentTransactions(payment.nameOnCard,
                                            payment.cardNumber,
                                            payment.cvv,

@@ -1,7 +1,11 @@
 ﻿@model OSRSClientSide.Models.PaymentDTO
+@using banks = OSRSClientSide.Models.EnumsAndConstants.Banks
 
 @{
     ViewBag.Title = "Index";
+    string ddSelectBank = "Select Bank";
+    string amCustomer = "Index";
+    string cnCustomer = "Customer";
 }
 
 <h2>Payment</h2>
@@ -25,6 +29,32 @@
         $('#netBankingName,#amount').prop("disabled", "disabled");
     });
 </script>
+@if (ViewBag.PaymentStatus != null)
+{
+    <script type="text/javascript">
+
+            window.onload = function () {
+                alert("@ViewBag.PaymentStatus");
+
+                window.location.href = "@Url.Action(@amCustomer, @cnCustomer)";
+
+            };
+    </script>
+
+}
+@if (ViewBag.SelectPaymentMethod != null)
+{
+    <script type="text/javascript">
+
+            window.onload = function () {
+                alert("@ViewBag.SelectPaymentMethod");
+
+               // window.location.href = "@Url.Action(@amCustomer, @cnCustomer)";
+
+            };
+    </script>
+
+}
 
 @using (Html.BeginForm())
 {
@@ -83,7 +113,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.netBankingName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.netBankingName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.netBankingName, new SelectList(Enum.GetValues(typeof(banks))), @ddSelectBank)
+                @*@Html.EditorFor(model => model.netBankingName, new { htmlAttributes = new { @class = "form-control" } })*@
                 @Html.ValidationMessageFor(model => model.netBankingName, "", new { @class = "text-danger" })
 
             </div>
@@ -95,21 +126,9 @@
             </div>
         </div>
     </div>
-}
 
-@if (ViewBag.Message != null)
-    {
-<script type="text/javascript">
 
-            window.onload = function () {
-                alert("@ViewBag.Message");
 
-               @*window.location.href = "@Url.Action(@amLogin, @cnLogin)";*@
-
-            };
-</script>
-
-    }
 }
 
 
