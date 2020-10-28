@@ -4,9 +4,13 @@
     //string btnPlaceOrder = "Place Order";
     string amPayment = "Index";
     string cnPayment = "Payment";
+    string amEditProfile = "Index";
+    string cnEditProfile = "EditProfile";
+    string amViewCart = "ViewCart";
+    string cnViewCart = "Customer";
 }
 
-<h2>Customer</h2>
+<h2>View Products</h2>
 
 
 @if (Session["userid"] != null)
@@ -16,6 +20,16 @@
     </p>
 }
 
+@*<input type="button"
+       value="Make Payment"
+       onclick="location.href= '@Url.Action(@amPayment, @cnPayment )' " class="btn btn-default" />*@
+
 <input type="button"
-       value="Place Order"
-       onclick="location.href= '@Url.Action(@amPayment, @cnPayment )' " class="btn btn-default"  />
+       value="Edit Profile"
+       onclick="location.href= '@Url.Action(@amEditProfile, @cnEditProfile )' " class="btn btn-default" />
+
+<input type="button"
+       value="View Cart"
+       onclick="location.href= '@Url.Action(@amViewCart, @cnViewCart )' " class="btn btn-default" />
+
+

@@ -1,3 +1,4 @@
+D:\Capgemini\Project\OSRSWebAPI\OSRSWebAPI\obj\Debug\OSRSWebAPI.csproj.CoreCompileInputs.cache
 D:\Capgemini\Project\OSRSWebAPI\OSRSWebAPI\bin\OSRSWebAPI.dll.config
 D:\Capgemini\Project\OSRSWebAPI\OSRSWebAPI\bin\OSRSWebAPI.dll
 D:\Capgemini\Project\OSRSWebAPI\OSRSWebAPI\bin\OSRSWebAPI.pdb
@@ -82,8 +83,7 @@ D:\Capgemini\Project\OSRSWebAPI\OSRSWebAPI\bin\System.Web.WebPages.Deployment.xm
 D:\Capgemini\Project\OSRSWebAPI\OSRSWebAPI\bin\System.Web.WebPages.Razor.xml
 D:\Capgemini\Project\OSRSWebAPI\OSRSWebAPI\bin\Antlr3.Runtime.pdb
 D:\Capgemini\Project\OSRSWebAPI\OSRSWebAPI\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-D:\Capgemini\Project\OSRSWebAPI\OSRSWebAPI\obj\Debug\OSRSWebAPI.csproj.CoreCompileInputs.cache
+D:\Capgemini\Project\OSRSWebAPI\OSRSWebAPI\obj\Debug\OSRSWebAPI.csprojAssemblyReference.cache
 D:\Capgemini\Project\OSRSWebAPI\OSRSWebAPI\obj\Debug\OSRSWebAPI.csproj.CopyComplete
 D:\Capgemini\Project\OSRSWebAPI\OSRSWebAPI\obj\Debug\OSRSWebAPI.dll
 D:\Capgemini\Project\OSRSWebAPI\OSRSWebAPI\obj\Debug\OSRSWebAPI.pdb
-D:\Capgemini\Project\OSRSWebAPI\OSRSWebAPI\obj\Debug\OSRSWebAPI.csprojAssemblyReference.cache

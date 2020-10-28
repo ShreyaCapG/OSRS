@@ -166,11 +166,11 @@ namespace OSRSWebAPI.Controllers
         //same as GetUserByID
         public IHttpActionResult GetUserDetailsByID(int userid)
         {
-            IList<UsertableDTO> users = null;
+           UsertableDTO user = null;
 
             using (var ctx = new OSRSEntities())
             {
-                users = ctx.UserTables.Include("RoleType")
+                user = ctx.UserTables.Include("RoleType")
                             .Where(
                                     u => u.userid == userid
                             )
@@ -187,15 +187,15 @@ namespace OSRSWebAPI.Controllers
                                     roleid = u.RoleType.roleid,
                                     user_type = u.RoleType.user_type
                                 }
-                            }).ToList<UsertableDTO>();
+                            }).FirstOrDefault<UsertableDTO>();
             }
 
-            if (users.Count == 0)
+            if (user == null)
             {
                 return NotFound();
             }
 
-            return Ok(users);
+            return Ok(user);
         }
 
         //update user details

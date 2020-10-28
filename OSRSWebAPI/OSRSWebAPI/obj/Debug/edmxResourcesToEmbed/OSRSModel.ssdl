@@ -16,7 +16,7 @@
     <Property Name="product_id" Type="int" Nullable="false" />
     <Property Name="quantity" Type="int" Nullable="false" />
     <Property Name="no_of_renting_days" Type="int" Nullable="false" />
-    <Property Name="cartitemmapping_id" Type="int" Nullable="false" />
+    <Property Name="cartitemmapping_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
   <EntityType Name="OrderItemMapping">
     <Key>
@@ -82,13 +82,13 @@
     <Key>
       <PropertyRef Name="userid" />
     </Key>
-    <Property Name="name" Type="char" MaxLength="50" Nullable="false" />
     <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="password" Type="varchar" MaxLength="20" Nullable="false" />
     <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="contact_number" Type="varchar" MaxLength="10" />
     <Property Name="userid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="usertype" Type="int" />
+    <Property Name="name" Type="varchar" MaxLength="50" />
   </EntityType>
   <Association Name="FK__Cart__userid__5441852A">
     <End Role="UserTable" Type="Self.UserTable" Multiplicity="1" />
@@ -102,7 +102,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__CartItemM__cart___5812160E">
+  <Association Name="FK__CartItemM__cart___467D75B8">
     <End Role="Cart" Type="Self.Cart" Multiplicity="1" />
     <End Role="CartItemMapping" Type="Self.CartItemMapping" Multiplicity="*" />
     <ReferentialConstraint>
@@ -114,7 +114,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__CartItemM__produ__571DF1D5">
+  <Association Name="FK__CartItemM__produ__4589517F">
     <End Role="Product" Type="Self.Product" Multiplicity="1" />
     <End Role="CartItemMapping" Type="Self.CartItemMapping" Multiplicity="*" />
     <ReferentialConstraint>
@@ -256,6 +256,18 @@
     <Parameter Name="expiryDate" Type="datetime" Mode="In" />
     <Parameter Name="amount" Type="float" Mode="In" />
   </Function>
+  <Function Name="getcartitemmapping" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="userid" Type="int" Mode="In" />
+  </Function>
+  <Function Name="getcartitemmappingv2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="userid" Type="int" Mode="In" />
+  </Function>
+  <Function Name="getcartitemmappingv3" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="userid" Type="int" Mode="In" />
+  </Function>
+  <Function Name="ViewProducts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="userid" Type="int" Mode="In" />
+  </Function>
   <EntityContainer Name="OSRSModelStoreContainer">
     <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CartItemMapping" EntityType="Self.CartItemMapping" Schema="dbo" store:Type="Tables" />
@@ -270,11 +282,11 @@
       <End Role="UserTable" EntitySet="UserTable" />
       <End Role="Cart" EntitySet="Cart" />
     </AssociationSet>
-    <AssociationSet Name="FK__CartItemM__cart___5812160E" Association="Self.FK__CartItemM__cart___5812160E">
+    <AssociationSet Name="FK__CartItemM__cart___467D75B8" Association="Self.FK__CartItemM__cart___467D75B8">
       <End Role="Cart" EntitySet="Cart" />
       <End Role="CartItemMapping" EntitySet="CartItemMapping" />
     </AssociationSet>
-    <AssociationSet Name="FK__CartItemM__produ__571DF1D5" Association="Self.FK__CartItemM__produ__571DF1D5">
+    <AssociationSet Name="FK__CartItemM__produ__4589517F" Association="Self.FK__CartItemM__produ__4589517F">
       <End Role="Product" EntitySet="Product" />
       <End Role="CartItemMapping" EntitySet="CartItemMapping" />
     </AssociationSet>

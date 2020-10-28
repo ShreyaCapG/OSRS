@@ -101,5 +101,51 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="addPaymentTransactions" FunctionName="OSRSModel.Store.addPaymentTransactions" />
+    <FunctionImportMapping FunctionImportName="ViewProducts" FunctionName="OSRSModel.Store.ViewProducts">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="OSRSModel.ViewProducts_Result">
+          <ScalarProperty Name="Product_ID" ColumnName="Product ID" />
+          <ScalarProperty Name="Product_Name" ColumnName="Product Name" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="getcartitemmapping" FunctionName="OSRSModel.Store.getcartitemmapping">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="OSRSModel.getcartitemmapping_Result">
+          <ScalarProperty Name="cart_id" ColumnName="cart_id" />
+          <ScalarProperty Name="product_id" ColumnName="product_id" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="no_of_renting_days" ColumnName="no_of_renting_days" />
+          <ScalarProperty Name="cartitemmapping_id" ColumnName="cartitemmapping_id" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="getcartitemmappingv2" FunctionName="OSRSModel.Store.getcartitemmappingv2">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="OSRSModel.getcartitemmappingv2_Result">
+          <ScalarProperty Name="product_name" ColumnName="product_name" />
+          <ScalarProperty Name="product_name1" ColumnName="product_name1" />
+          <ScalarProperty Name="product_category" ColumnName="product_category" />
+          <ScalarProperty Name="cart_id" ColumnName="cart_id" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="no_of_renting_days" ColumnName="no_of_renting_days" />
+          <ScalarProperty Name="total" ColumnName="total" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="getcartitemmappingv3" FunctionName="OSRSModel.Store.getcartitemmappingv3">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="OSRSModel.getcartitemmappingv3_Result">
+          <ScalarProperty Name="product_name" ColumnName="product_name" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="product_category" ColumnName="product_category" />
+          <ScalarProperty Name="cart_id" ColumnName="cart_id" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="no_of_renting_days" ColumnName="no_of_renting_days" />
+          <ScalarProperty Name="total" ColumnName="total" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

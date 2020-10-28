@@ -6,7 +6,29 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js" />
     <script src="~/Scripts/modernizr-2.8.3.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#btnLogout').click(function () {
+                alert('You Clicked Button');
+                window.location.href = URL.RedirectToAction("Index", "Login");
+
+                //FormsAuthentication.SignOut();
+                //return RedirectToAction("Index", "Login");
+
+            });
+        });
+    </script>
+    @*<script type="text/javascript">
+            alert("alert");
+            function Logout() {
+                FormsAuthentication.SignOut();
+                return RedirectToAction("Index", "Login");
+            }
+        </script>*@
+
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -18,11 +40,31 @@
                     <span class="icon-bar"></span>
                 </button>
                 @Html.ActionLink("One Stop Rental System", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+
+                <div>
+                    @if (ViewContext.RouteData.Values["controller"].ToString() != "Login" && ViewContext.RouteData.Values["controller"].ToString() != "SignUp")
+                    {
+                        @Html.ActionLink("Logout", "Index", "Login")
+                        @*<strong>@Html.Encode(User.Identity.Name)</strong>*@
+                        @*<input type="button" id="btnLogout" value="Logout" class="btn btn-default" />*@
+                        @*<script type="text/javascript">
+                                $('#btnLogout').click(function () {
+                                    alert('You Clicked Button');
+                                });
+                            </script>*@
+
+
+                        @*@Html.ActionLink("Log Out", "Logout")*@
+                    }
+
+                </div>
+
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                 </ul>
             </div>
+
         </div>
     </div>
 

@@ -12,7 +12,7 @@
     <Key>
       <PropertyRef Name="userid" />
     </Key>
-    <Property Name="name" Type="String" MaxLength="50" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
@@ -110,6 +110,18 @@
       <Parameter Name="userid" Mode="In" Type="Int32" />
       <Parameter Name="expiryDate" Mode="In" Type="DateTime" />
       <Parameter Name="amount" Mode="In" Type="Double" />
+    </FunctionImport>
+    <FunctionImport Name="ViewProducts" ReturnType="Collection(OSRSModel.ViewProducts_Result)">
+      <Parameter Name="userid" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="getcartitemmapping" ReturnType="Collection(OSRSModel.getcartitemmapping_Result)">
+      <Parameter Name="userid" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="getcartitemmappingv2" ReturnType="Collection(OSRSModel.getcartitemmappingv2_Result)">
+      <Parameter Name="userid" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="getcartitemmappingv3" ReturnType="Collection(OSRSModel.getcartitemmappingv3_Result)">
+      <Parameter Name="userid" Mode="In" Type="Int32" />
     </FunctionImport>
   </EntityContainer>
   <EntityType Name="Cart">
@@ -345,4 +357,34 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <ComplexType Name="ViewProducts_Result">
+    <Property Type="Int32" Name="Product_ID" Nullable="false" />
+    <Property Type="String" Name="Product_Name" Nullable="false" MaxLength="10" />
+    <Property Type="Double" Name="Price" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="getcartitemmapping_Result">
+    <Property Type="Int32" Name="cart_id" Nullable="false" />
+    <Property Type="Int32" Name="product_id" Nullable="false" />
+    <Property Type="Int32" Name="quantity" Nullable="false" />
+    <Property Type="Int32" Name="no_of_renting_days" Nullable="false" />
+    <Property Type="Int32" Name="cartitemmapping_id" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="getcartitemmappingv2_Result">
+    <Property Type="String" Name="product_name" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="product_name1" Nullable="false" MaxLength="10" />
+    <Property Type="String" Name="product_category" Nullable="true" MaxLength="20" />
+    <Property Type="Int32" Name="cart_id" Nullable="false" />
+    <Property Type="Int32" Name="quantity" Nullable="false" />
+    <Property Type="Int32" Name="no_of_renting_days" Nullable="false" />
+    <Property Type="Double" Name="total" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="getcartitemmappingv3_Result">
+    <Property Type="String" Name="product_name" Nullable="false" MaxLength="10" />
+    <Property Type="Double" Name="price" Nullable="false" />
+    <Property Type="String" Name="product_category" Nullable="true" MaxLength="20" />
+    <Property Type="Int32" Name="cart_id" Nullable="false" />
+    <Property Type="Int32" Name="quantity" Nullable="false" />
+    <Property Type="Int32" Name="no_of_renting_days" Nullable="false" />
+    <Property Type="Double" Name="total" Nullable="false" />
+  </ComplexType>
 </Schema>

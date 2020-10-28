@@ -206,20 +206,26 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\EditProfileController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Controllers\SellerController.cs" />
     <Compile Include="Controllers\SignUpController.cs" />
+    <Compile Include="Controllers\ViewOrderController.cs" />
+    <Compile Include="Controllers\ViewOrderCustomerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CartItemsDTO.cs" />
     <Compile Include="Models\EnumsAndConstants.cs" />
     <Compile Include="Models\LoginDTO.cs" />
     <Compile Include="Models\OrdersDTO.cs" />
     <Compile Include="Models\PaymentDTO.cs" />
+    <Compile Include="Models\ProductDTO.cs" />
     <Compile Include="Models\RoletypeDTO.cs" />
     <Compile Include="Models\UsertableDTO.cs" />
     <Compile Include="Models\UsertableView.cs" />
+    <Compile Include="Models\ViewOrderDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -235,6 +241,15 @@
     <Content Include="Views\Customer\Index.cshtml" />
     <Content Include="Views\PlaceOrder\Index.cshtml" />
     <Content Include="Views\Payment\Index.cshtml" />
+    <Content Include="Views\EditProfile\Index.cshtml" />
+    <Content Include="Views\Customer\ViewCart.cshtml" />
+    <Content Include="Views\Seller\ShowProducts.cshtml" />
+    <Content Include="Views\Seller\AddProduct.cshtml" />
+    <Content Include="Views\Seller\UpdateProduct.cshtml" />
+    <Content Include="Views\Seller\Details.cshtml" />
+    <Content Include="Views\Seller\DeleteProduct.cshtml" />
+    <Content Include="Views\ViewOrder\Index.cshtml" />
+    <Content Include="Views\ViewOrderCustomer\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

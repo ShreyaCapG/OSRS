@@ -73,5 +73,41 @@ namespace OSRSWebAPI
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("addPaymentTransactions", nameOnCardParameter, cardNumberParameter, cvvParameter, netbankingNameParameter, order_idParameter, useridParameter, expiryDateParameter, amountParameter);
         }
+    
+        public virtual ObjectResult<ViewProducts_Result> ViewProducts(Nullable<int> userid)
+        {
+            var useridParameter = userid.HasValue ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ViewProducts_Result>("ViewProducts", useridParameter);
+        }
+    
+        public virtual ObjectResult<getcartitemmapping_Result> getcartitemmapping(Nullable<int> userid)
+        {
+            var useridParameter = userid.HasValue ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getcartitemmapping_Result>("getcartitemmapping", useridParameter);
+        }
+    
+        public virtual ObjectResult<getcartitemmappingv2_Result> getcartitemmappingv2(Nullable<int> userid)
+        {
+            var useridParameter = userid.HasValue ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getcartitemmappingv2_Result>("getcartitemmappingv2", useridParameter);
+        }
+    
+        public virtual ObjectResult<getcartitemmappingv3_Result> getcartitemmappingv3(Nullable<int> userid)
+        {
+            var useridParameter = userid.HasValue ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getcartitemmappingv3_Result>("getcartitemmappingv3", useridParameter);
+        }
     }
 }

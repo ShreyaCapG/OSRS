@@ -12,7 +12,7 @@ namespace OSRSClientSide.Controllers
         private static string password;
         private static int usertype;
         private const string baseurl = "https://localhost:44357/";
-        private string amSeller = "Index";
+        private string amSeller = "ShowProducts";
         private string amCustomer = "Index";
         private string controllerSeller = "Seller";
         private string controllerCustomer = "Customer";

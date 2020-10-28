@@ -170,14 +170,29 @@
     </Compile>
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
+    <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\Productv2Controller.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Controllers\ViewOrderSellerController.cs" />
+    <Compile Include="getcartitemmappingv2_Result.cs">
+      <DependentUpon>OSRSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="getcartitemmappingv3_Result.cs">
+      <DependentUpon>OSRSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="getcartitemmapping_Result.cs">
+      <DependentUpon>OSRSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CartItemsDTO.cs" />
     <Compile Include="Models\PaymentDTO.cs" />
+    <Compile Include="Models\ProductDTO.cs" />
     <Compile Include="Models\RoletypeDTO.cs" />
     <Compile Include="Models\UsertableDTO.cs" />
+    <Compile Include="Models\ViewOrderDTO.cs" />
     <Compile Include="OrderItemMapping.cs">
       <DependentUpon>OSRSModel.tt</DependentUpon>
     </Compile>
@@ -213,6 +228,9 @@
       <DependentUpon>OSRSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="UserTable.cs">
+      <DependentUpon>OSRSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewProducts_Result.cs">
       <DependentUpon>OSRSModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>
