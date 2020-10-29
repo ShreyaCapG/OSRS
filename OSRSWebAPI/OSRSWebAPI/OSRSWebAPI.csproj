@@ -168,6 +168,7 @@
     <Compile Include="CartItemMapping.cs">
       <DependentUpon>OSRSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\GetCartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />

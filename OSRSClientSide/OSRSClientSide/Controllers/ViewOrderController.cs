@@ -16,6 +16,10 @@ namespace OSRSClientSide.Controllers
         // GET: Product details
         public ActionResult Index()
         {
+            if (Session["userid"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             IEnumerable<ViewOrderDTO> order = null;
 
             using (var client = new HttpClient())

@@ -10,7 +10,7 @@ namespace OSRSClientSide.Controllers
 {
     public class SellerController : Controller
     {
-        int userid;
+        //int userid;
         private const string baseurl = "https://localhost:44357/";
         string errormessage = "Server error. Please Check the  URL";
         //public SellerController()
@@ -27,9 +27,13 @@ namespace OSRSClientSide.Controllers
 
         public void Index()
         {
+            //if (Session["userid"] == null)
+            //{
+            //    return RedirectToAction("Index", "Login");
+            //}
             //this.ShowProducts();
             //return View("ShowProducts");
-            
+
         }
         //[HttpGet]
         //// GET: Seller
@@ -55,6 +59,10 @@ namespace OSRSClientSide.Controllers
 
         public ActionResult ShowProducts()
         {
+            if (Session["userid"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             var userid = Session["userid"];
             IEnumerable<ProductDTO> products = null;
             using (var client = new HttpClient())
@@ -89,12 +97,20 @@ namespace OSRSClientSide.Controllers
         [HttpGet]
         public ActionResult AddProduct()
         {
+            if (Session["userid"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             return View();
         }
 
         [HttpPost]
         public ActionResult AddProduct(ProductDTO product)
         {
+            if (Session["userid"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             if (Session["userid"] != null && ModelState.IsValid)
             {
                 product.userid = (int)Session["userid"];
@@ -128,6 +144,10 @@ namespace OSRSClientSide.Controllers
         [HttpGet]
         public ActionResult UpdateProduct(int? id)
         {
+            if (Session["userid"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             ProductDTO product = null;
 
             using (var client = new HttpClient())
@@ -154,6 +174,10 @@ namespace OSRSClientSide.Controllers
         [HttpPost]
         public ActionResult UpdateProduct(ProductDTO product)
         {
+            if (Session["userid"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(baseurl);
@@ -166,7 +190,7 @@ namespace OSRSClientSide.Controllers
                 if (result.IsSuccessStatusCode)
                 {
 
-                    return RedirectToAction("Index");
+                    return RedirectToAction("ShowProducts");
                 }
             }
             return View(product);
@@ -174,11 +198,11 @@ namespace OSRSClientSide.Controllers
 
 
         //might need some changes
-        [HttpGet]
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
+        //[HttpGet]
+        //public ActionResult Details(int id)
+        //{
+        //    return View();
+        //}
 
 
         //need some database changes, do not call if not necessary
@@ -196,11 +220,11 @@ namespace OSRSClientSide.Controllers
                 if (result.IsSuccessStatusCode)
                 {
 
-                    return RedirectToAction("Index");
+                    return RedirectToAction("ShowProducts");
                 }
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction("DeleteProduct");
         }
     }
 }

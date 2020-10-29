@@ -17,15 +17,24 @@ namespace OSRSClientSide.Controllers
         [HttpGet]
         public ActionResult Index()
         {
+            int amount=0;
+            int userid=8;
+            if (Session["userid"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             //static values for development purpose
-           
+
             Session["orderDetails"] = orderDetail;
 
             //actual code
-            if (Session["orderDetails"]!=null)
-            {}
-            
-           return View(new PaymentDTO() { amount = orderDetail.amount,userid=orderDetail.userid,order_id=orderDetail.order_id });
+            if (Session["price"] != null)
+            {
+                amount = int.Parse(Session["price"].ToString());
+                userid = int.Parse(Session["userid"].ToString());
+            }
+
+            return View(new PaymentDTO() { amount = amount,userid=userid,order_id=orderDetail.order_id });
         }
         public bool validateName(string name)
         {
@@ -43,8 +52,12 @@ namespace OSRSClientSide.Controllers
         [HttpPost]
         public ActionResult Index(PaymentDTO payment)
         {
-            
-                if (!string.IsNullOrEmpty(payment.netBankingName) ||
+            if (Session["userid"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            if (!string.IsNullOrEmpty(payment.netBankingName) ||
                 (!string.IsNullOrEmpty(payment.nameOnCard) &&  payment.cardNumber != 0 && payment.cvv != 0 && payment.expiryDate != null )  )
             {
                 

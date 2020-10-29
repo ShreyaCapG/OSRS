@@ -8,6 +8,10 @@ namespace OSRSClientSide.Controllers
 {
     public class LoginController : Controller
     {
+        public LoginController()
+        {
+           // Session.Abandon();
+        }
         private static string username;
         private static string password;
         private static int usertype;
@@ -22,9 +26,17 @@ namespace OSRSClientSide.Controllers
             customer = 2
         }
 
+        /*
+         Function : Index
+         Clears Session and loads login page.
+         */
         [HttpGet]
         public ActionResult Index()
         {
+            if (Session["userid"] != null)
+            {
+                Session.Clear();
+            }
             return View();
         }
 

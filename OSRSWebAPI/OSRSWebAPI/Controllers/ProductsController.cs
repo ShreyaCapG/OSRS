@@ -28,7 +28,7 @@ namespace OSRSWebAPI.Controllers
         //            ProductDTO product = new ProductDTO();
         //            product.product_id = item.Product_ID;
         //            product.product_name = item.Product_Name;
-        //            product.price = item.Price;
+        //            product.prxice = item.Price;
         //            products.Add(product);
         //        }
         //        //if (products.Count == 0)
@@ -39,7 +39,31 @@ namespace OSRSWebAPI.Controllers
         //        return Ok(products);
         //    }
         //}
+        public IHttpActionResult GetAllProducts()
+        {
 
+            IList<ProductDTO> productsseller = null;
+
+            using (var ctx = new OSRSEntities())
+            {
+                productsseller = ctx.Products
+                            .Select(s => new ProductDTO()
+                            {
+                                product_id = s.product_id,
+                                userid = s.userid,
+                                product_category = s.product_category,
+                                product_name = s.product_name,
+                                price = s.price
+                            }).ToList<ProductDTO>();
+            }
+
+            if (productsseller.Count == 0)
+            {
+                return NotFound();
+            }
+
+            return Ok(productsseller);
+        }
         //2
         public IHttpActionResult GetProductsByUserId(int userid)
         {

@@ -16,6 +16,10 @@ namespace OSRSClientSide.Controllers
         [HttpGet]
         public ActionResult Index()
         {
+            if (Session["userid"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
 
             if (Session["userid"] != null)
             {
@@ -85,6 +89,7 @@ namespace OSRSClientSide.Controllers
         [HttpPost]
         public ActionResult Index(UsertableView updatedDetails)
         {
+
             userdetails = (UsertableView)Session["userdetailspost"];
             updatedDetails.usertype = new RoletypeDTO()
             {

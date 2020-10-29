@@ -250,6 +250,7 @@
     <Content Include="Views\Seller\DeleteProduct.cshtml" />
     <Content Include="Views\ViewOrder\Index.cshtml" />
     <Content Include="Views\ViewOrderCustomer\Index.cshtml" />
+    <Content Include="Views\Customer\Cart.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

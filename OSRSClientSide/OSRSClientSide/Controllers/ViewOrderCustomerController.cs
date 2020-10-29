@@ -11,6 +11,10 @@ namespace OSRSClientSide.Controllers
         // GET: ViewOrderCustomer
         public ActionResult Index()
         {
+            if (Session["userid"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             return View();
         }
     }
